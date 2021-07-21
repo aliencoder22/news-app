@@ -1,16 +1,11 @@
-import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-export default function useNewsItem(initialState = []) {
-  const [data, setData] = React.useState(initialState);
-  const onAction = (state = data, action) => {
-    console.log(state, action);
-    switch (action.type) {
-      case "SET_DATA":
-        //setData(action.value);
-        return action.value;
-      default:
-        return state;
-    }
+export default function useNewsItem() {
+  const state = useSelector((state) => state.data);
+  const dispatch = useDispatch();
+
+  const onAction = {
+    setData: (data) => dispatch({ type: "SET_DATA", value: data }),
   };
-  return [data, onAction];
+  return [state, onAction];
 }

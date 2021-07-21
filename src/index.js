@@ -2,10 +2,37 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
+import { createStore } from "redux";
+import { Provider } from "react-redux";
+
+const initialState = {
+  data: [],
+};
+
+const reducer = (state = initialState, action) => {
+  switch (action.type) {
+    case "SET_DATA":
+      return {
+        ...state,
+        data: action.value,
+      };
+    case "DELETE_POST":
+      return {
+        ...state,
+        data: state.data.filter((el, id) => id !== action.value),
+      };
+    default:
+      return state;
+  }
+};
+
+const store = createStore(reducer);
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </React.StrictMode>,
   document.getElementById("root")
 );

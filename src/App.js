@@ -2,16 +2,23 @@ import "./App.css";
 import React from "react";
 import Display from "./Display";
 import useNewsItem from "./useNewsItem";
-import { createStore, applyMiddleware } from "redux";
-import { Provider } from "react-redux";
-import thunk from "redux-thunk";
-export default function App() {
-  const [data, onAction] = useNewsItem();
-  const store = createStore(onAction, applyMiddleware(thunk));
 
+export default function App() {
+  const [, onAction] = useNewsItem();
+
+  React.useEffect(() => {
+    const fetchData = async () => {
+      const url =
+        "https://newsapi.org/v2/top-headlines?country=in&apiKey=ad23c45e8dbf4c418fc72871384d9ec5";
+      let result = await fetch(url).then((response) => response.json());
+      onAction.setData(result.articles);
+    };
+    fetchData();
+  }, []);
   return (
-    <Provider store={store}>
+    <div className="container">
       <Display />
-    </Provider>
+      <Display />
+    </div>
   );
 }
