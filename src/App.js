@@ -9,7 +9,7 @@ export default function App() {
   React.useEffect(() => {
     const fetchData = async () => {
       const url =
-        "https://newsapi.org/v2/top-headlines?country=in&apiKey=ad23c45e8dbf4c418fc72871384d9ec5";
+        "https://newsapi.org/v2/top-headlines?country=in&apiKey=021d22e0511941c1a2da6ec08f7a965a";
       let result = await fetch(url).then((response) => response.json());
       onAction.setData(result.articles);
     };
