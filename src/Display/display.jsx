@@ -10,7 +10,7 @@ export default function Display() {
   const [data] = useNewsItem();
   const ITEMS_COUNT = data.length;
   const content = (
-    <div style={{ height: "100vh" }}>
+    <div style={{ height: "94vh" }}>
       <AutoSizer>
         {({ height, width }) => {
           const itemsPerRow = 2;
