@@ -1,7 +1,7 @@
 import React from "react";
-import Post from "./Post";
-import useNewsItem from "./useNewsItem";
-import "./Display.css";
+import Post from "../Post/post";
+import useNewsItem from "../CustomHooks/useNewsItem";
+import "./display.css";
 import { AutoSizer, List } from "react-virtualized";
 
 let id = 0;
@@ -54,5 +54,9 @@ export default function Display() {
       </AutoSizer>
     </div>
   );
-  return <div>{data.length ? content : "Loading"}</div>;
+  return (
+    <div>
+      {data.length ? content : <h2 style={{ textAlign: "center" }}>Loading</h2>}
+    </div>
+  );
 }
