@@ -6,7 +6,7 @@ import { AutoSizer, List } from "react-virtualized";
 let id = 0;
 
 export default function Display() {
-  const [data] = useNewsItem();
+  const [data, onAction] = useNewsItem();
   const ITEMS_COUNT = data.length;
   const content = (
     <div style={{ height: "94vh" }}>
@@ -37,6 +37,7 @@ export default function Display() {
                       content={post.content}
                       description={post.description}
                       id={i}
+                      onDelete={onAction.deletePost}
                     />
                   );
                 }
