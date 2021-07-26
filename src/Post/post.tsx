@@ -1,8 +1,15 @@
-import React from "react";
 import Card from "react-bootstrap/Card";
-import Button from "react-bootstrap/Button";
 import "./post.css";
 import useNewsItem from "../CustomHooks/useNewsItem";
+
+type PostProps = {
+  title: string;
+  url: string;
+  imageUrl: string;
+  content: string;
+  description: string;
+  id: number;
+};
 
 export default function Post({
   title,
@@ -11,7 +18,7 @@ export default function Post({
   content,
   description,
   id,
-}) {
+}: PostProps) {
   const [, onAction] = useNewsItem();
 
   const defaultImg =
@@ -29,10 +36,18 @@ export default function Post({
         <Card.Text>{description ? description.slice(0, 100) : ""}</Card.Text>
       </Card.Body>
       <Card.Footer className="footer">
-        <Button onClick={() => onAction.deletePost(id)}>Delete</Button>
-        <Button onClick={() => window.open(url, "_blank")} variant="danger">
+        <button
+          style={{ backgroundColor: "red" }}
+          onClick={() => onAction.deletePost(id)}
+        >
+          Delete
+        </button>
+        <button
+          style={{ backgroundColor: "blue" }}
+          onClick={() => window.open(url, "_blank")}
+        >
           News Article
-        </Button>
+        </button>
       </Card.Footer>
     </Card>
   );

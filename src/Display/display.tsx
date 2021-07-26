@@ -1,4 +1,3 @@
-import React from "react";
 import Post from "../Post/post";
 import useNewsItem from "../CustomHooks/useNewsItem";
 import "./display.css";

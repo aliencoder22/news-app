@@ -17,14 +17,15 @@ export default function App() {
     [onAction]
   );
 
-  const handlePageClick = (event) => {
-    let selectedPage = parseInt(event.selected) + 1;
+  const handlePageClick = (event: { selected: number }) => {
+    let selectedPage = event.selected + 1;
     setPage(selectedPage);
   };
 
   React.useEffect(() => {
     fetchData(page);
   }, [fetchData, page]);
+
   return (
     <>
       <div className="container">
@@ -38,6 +39,8 @@ export default function App() {
         onPageChange={handlePageClick}
         containerClassName={"pagination"}
         activeClassName={"active"}
+        pageRangeDisplayed={5}
+        marginPagesDisplayed={5}
       />
     </>
   );
