@@ -12,6 +12,7 @@ const AllCharacters = gql`
         name
         image
         status
+        favourite @client
         episode {
           id
           name
@@ -58,10 +59,10 @@ function DisplayCharacter({ image, name, status, episodes }) {
 
   return (
     <>
-      <div style={{ width: "20rem", margin: "10px" }}>
+      <div style={{ width: "15rem", margin: "10px" }}>
         <img
           src={image}
-          style={{ height: "20rem", width: "20rem" }}
+          style={{ height: "15rem", width: "15rem" }}
           alt="Nothing"
         />
         <p style={{ textAlign: "center" }}>
@@ -116,6 +117,7 @@ export default function Characters() {
         style={{
           display: "flex",
           flexWrap: "wrap",
+          justifyContent: "space-around",
           height: "94vh",
           overflow: "scroll",
         }}
