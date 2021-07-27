@@ -2,6 +2,7 @@ import { useQuery } from "@apollo/client";
 import gql from "graphql-tag";
 import React from "react";
 import ReactPaginate from "react-paginate";
+import "./Characters.css";
 
 const AllCharacters = gql`
   query AllCharacters($page: Int) {
@@ -11,24 +12,74 @@ const AllCharacters = gql`
         name
         image
         status
-        type
+        episode {
+          id
+          name
+          air_date
+        }
       }
     }
   }
 `;
 
-function DisplayCharacter({ image, name, status }) {
+function Modal({ show, onClose, name, episodes }) {
+  if (!show) {
+    return null;
+  }
+
+  let content = episodes.map((el) => (
+    <li>
+      {el.name} : {el.air_date}
+    </li>
+  ));
+
   return (
-    <div style={{ width: "20rem", margin: "10px" }}>
-      <img
-        src={image}
-        style={{ height: "20rem", width: "20rem" }}
-        alt="Nothing"
-      />
-      <p style={{ textAlign: "center" }}>
-        {name}: {status}
-      </p>
+    <div className="modal">
+      <div className="modal-content">
+        <div style={{ textAlign: "center", marginTop: "20px" }}>
+          Episodes of {name}
+        </div>
+        <ul>{content}</ul>
+        <div style={{ textAlign: "center", marginBottom: "20px" }}>
+          <button style={{ color: "black" }} onClick={onClose}>
+            Close
+          </button>
+        </div>
+      </div>
     </div>
+  );
+}
+
+function DisplayCharacter({ image, name, status, episodes }) {
+  const [show, setShow] = React.useState(false);
+  const onClose = () => {
+    setShow(false);
+  };
+
+  return (
+    <>
+      <div style={{ width: "20rem", margin: "10px" }}>
+        <img
+          src={image}
+          style={{ height: "20rem", width: "20rem" }}
+          alt="Nothing"
+        />
+        <p style={{ textAlign: "center" }}>
+          {name}: {status}
+        </p>
+        <div style={{ textAlign: "center" }}>
+          <button style={{ color: "black" }} onClick={() => setShow(true)}>
+            Show Episodes
+          </button>
+        </div>
+      </div>
+      <Modal
+        show={show}
+        onClose={onClose}
+        name={name}
+        episodes={episodes.slice(0, 5)}
+      />
+    </>
   );
 }
 
@@ -55,6 +106,7 @@ export default function Characters() {
       image={el.image}
       name={el.name}
       status={el.status}
+      episodes={el.episode}
     />
   ));
 
