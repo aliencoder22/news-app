@@ -3,6 +3,8 @@ import React from "react";
 import Display from "./Display/display";
 import useNewsItem from "./CustomHooks/useNewsItem";
 import ReactPaginate from "react-paginate";
+import { Route, Switch } from "react-router-dom";
+import Main from "./GraphQl/Main";
 
 export default function App() {
   const [, onAction] = useNewsItem();
@@ -27,21 +29,32 @@ export default function App() {
   }, [fetchData, page]);
 
   return (
-    <>
-      <div className="container">
-        <Display />
-        <Display />
-      </div>
-      <ReactPaginate
-        previousLabel={"prev"}
-        nextLabel={"next"}
-        pageCount={5}
-        onPageChange={handlePageClick}
-        containerClassName={"pagination"}
-        activeClassName={"active"}
-        pageRangeDisplayed={5}
-        marginPagesDisplayed={5}
-      />
-    </>
+    <Switch>
+      <Route
+        path="/"
+        exact
+        render={() => (
+          <>
+            <div className="container">
+              <Display />
+              <Display />
+            </div>
+            <ReactPaginate
+              previousLabel={"prev"}
+              nextLabel={"next"}
+              pageCount={5}
+              onPageChange={handlePageClick}
+              containerClassName={"pagination"}
+              activeClassName={"active"}
+              pageRangeDisplayed={5}
+              marginPagesDisplayed={5}
+            />
+          </>
+        )}
+      ></Route>
+      <Route path="/test" exact>
+        <Main />
+      </Route>
+    </Switch>
   );
 }
