@@ -14,3 +14,11 @@
     background-color: white;
     width: 500px;
 }
+
+.character-content{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    height: 94vh;
+    overflow: scroll;
+}
