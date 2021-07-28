@@ -2,7 +2,7 @@ import { useQuery } from "@apollo/client";
 import gql from "graphql-tag";
 import React from "react";
 import ReactPaginate from "react-paginate";
-import "./Characters.css";
+import styles from "./Characters.module.css";
 import DisplayCharacter from "./DisplayCharacter";
 
 const AllCharacters = gql`
@@ -25,9 +25,9 @@ const AllCharacters = gql`
 `;
 
 export default function Characters() {
-  const [page, setPage] = React.useState(1);
+  const [page, setPage] = React.useState(0);
   const { data, loading, error } = useQuery(AllCharacters, {
-    variables: { page },
+    variables: { page: page + 1 },
   });
 
   let display;
@@ -41,7 +41,7 @@ export default function Characters() {
   }
 
   const handlePageClick = (event) => {
-    setPage(event.selected + 1);
+    setPage(event.selected);
   };
 
   if (data) {
@@ -54,7 +54,7 @@ export default function Characters() {
         episodes={el.episode}
       />
     ));
-    display = <div className="character-content">{content}</div>;
+    display = <div className={styles.characterContent}>{content}</div>;
   }
 
   return (

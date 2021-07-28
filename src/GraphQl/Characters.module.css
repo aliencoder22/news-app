@@ -10,12 +10,12 @@
     justify-content: center;
 }
 
-.modal-content{
+.modalContent{
     background-color: white;
     width: 500px;
 }
 
-.character-content{
+.characterContent{
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;

@@ -1,3 +1,5 @@
+import styles from "./Characters.module.css";
+
 export default function Modal({ show, onClose, name, episodes }) {
   if (!show) {
     return null;
@@ -10,8 +12,8 @@ export default function Modal({ show, onClose, name, episodes }) {
   ));
 
   return (
-    <div className="modal">
-      <div className="modal-content">
+    <div className={styles.modal}>
+      <div className={styles.modalContent}>
         <div style={{ textAlign: "center", marginTop: "20px" }}>
           Episodes of {name}
         </div>

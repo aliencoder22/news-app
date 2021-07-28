@@ -1,6 +1,6 @@
 import Post from "../Post/post";
 import useNewsItem from "../CustomHooks/useNewsItem";
-import "./display.css";
+import styles from "./display.module.css";
 import { AutoSizer, List } from "react-virtualized";
 
 let id = 0;
@@ -43,7 +43,7 @@ export default function Display() {
                 }
 
                 return (
-                  <div className="Row" key={key} style={style}>
+                  <div className={styles.Row} key={key} style={style}>
                     {items}
                   </div>
                 );
